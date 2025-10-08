@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36518.9
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{EBD5BBC6-7A51-4AE3-9E15-1DDBEDEC6765}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{C031AB35-CB5F-4AD9-B8EA-C05657645984}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{060E4131-8EF1-4599-AE5F-32053F7B0142}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyRecipeBook.API", "src\Backend\MyRecipeBook.API\MyRecipeBook.API.csproj", "{4EBA3C37-C40F-4961-BF5E-479BA42D32E1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4EBA3C37-C40F-4961-BF5E-479BA42D32E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EBA3C37-C40F-4961-BF5E-479BA42D32E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EBA3C37-C40F-4961-BF5E-479BA42D32E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EBA3C37-C40F-4961-BF5E-479BA42D32E1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C031AB35-CB5F-4AD9-B8EA-C05657645984} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{060E4131-8EF1-4599-AE5F-32053F7B0142} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{4EBA3C37-C40F-4961-BF5E-479BA42D32E1} = {C031AB35-CB5F-4AD9-B8EA-C05657645984}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1A27490E-45E0-4ABD-BBCF-10CED9466278}
+	EndGlobalSection
+EndGlobal
