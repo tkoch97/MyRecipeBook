@@ -55,5 +55,8 @@ void MigrateDataBase()
 
 }
 
-public partial class Program { }
+public partial class Program 
+{ 
+    protected Program() {}
+}
 

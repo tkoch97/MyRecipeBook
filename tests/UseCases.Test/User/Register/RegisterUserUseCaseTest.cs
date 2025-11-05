@@ -63,7 +63,7 @@ namespace UseCases.Test.User.Register
 
 
 
-        private RegisterUserUseCase CreateUseCase(string? email = null)
+        private static RegisterUserUseCase CreateUseCase(string? email = null)
         {
             var mapper = MapperBuilder.Build();
 
@@ -71,7 +71,7 @@ namespace UseCases.Test.User.Register
 
             var readOnlyRepositoryBuilder = new UserReadOnlyRepositoryBuilder();
 
-            if(string.IsNullOrEmpty(email) == false)
+            if(!string.IsNullOrEmpty(email))
             {
                 readOnlyRepositoryBuilder.ExistActiveUserWithEmail(email);
             }

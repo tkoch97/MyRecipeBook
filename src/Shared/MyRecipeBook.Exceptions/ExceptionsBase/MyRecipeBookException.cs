@@ -1,6 +1,6 @@
 ﻿namespace MyRecipeBook.Exceptions.ExceptionsBase
 {
-    public class MyRecipeBookExceptions : System.Exception
+    public class MyRecipeBookException : System.Exception
     {
 
     }
