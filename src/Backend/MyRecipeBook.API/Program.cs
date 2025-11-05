@@ -2,6 +2,8 @@ using MyRecipeBook.API.Filters;
 using MyRecipeBook.API.Middleware;
 using MyRecipeBook.Application;
 using MyRecipeBook.Infrastructure;
+using MyRecipeBook.Infrastructure.Extensions;
+using MyRecipeBook.Infrastructure.Migrations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,4 +33,27 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+MigrateDataBase();
+
 app.Run();
+
+void MigrateDataBase()
+{
+    if (builder.Configuration.IsInMemoryTestEnvironment()) 
+    {
+        return;
+    }
+    var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
+    var connectionString = builder.Configuration.ConnectionString();
+
+    DatabaseMigration.Migrate(connectionString, serviceScope.ServiceProvider);
+
+    // O service Scope é um escopo temporário de injeção de dependência
+    // que é criado para realizar a migração do banco de dados. Pq o DbCOntext e o IMigrationRunner são scoped e
+    // Precisam de um escopo para serem resolvidos corretamente.
+    // O usamos sempre que precisamos usar serviços com tempo de vida scoped fora do contexto de uma requisição HTTP.
+
+}
+
+public partial class Program { }
+
