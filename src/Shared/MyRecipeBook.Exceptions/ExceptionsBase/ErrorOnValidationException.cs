@@ -5,7 +5,7 @@
 
         public IList<string> ErrorMessages { get; set; }
 
-        public ErrorOnValidationException(IList<string> errorMesssages) 
+        public ErrorOnValidationException(IList<string> errorMesssages) : base(string.Empty)
         {
             ErrorMessages = errorMesssages;
         }

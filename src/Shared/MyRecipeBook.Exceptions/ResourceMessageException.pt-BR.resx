@@ -117,11 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CURRENT_PASSWORD_EMPTY" xml:space="preserve">
+    <value>Informe a senha atual.</value>
+  </data>
   <data name="EMAIL_ALREADY_REGISTERED" xml:space="preserve">
     <value>Endereço de e-mail já registrado.</value>
   </data>
   <data name="EMAIL_EMPTY" xml:space="preserve">
     <value>O e-mail não pode ser vazio.</value>
+  </data>
+  <data name="EMAIL_OR_PASSWORD_INVALID" xml:space="preserve">
+    <value>Email e/ou senha inválidos.</value>
   </data>
   <data name="EMAIL_VALID" xml:space="preserve">
     <value>Passe um endereço de e-mail válido.</value>
@@ -129,10 +135,28 @@
   <data name="NAME_EMPTY" xml:space="preserve">
     <value>O nome não pode ser vazio.</value>
   </data>
+  <data name="NEW_PASSWORD_EMPTY" xml:space="preserve">
+    <value>Informe a nova senha desejada.</value>
+  </data>
+  <data name="PASSWORDS_MUST_BE_DIFFERENT" xml:space="preserve">
+    <value>A nova senha precisa ser diferente da atual.</value>
+  </data>
+  <data name="NO_TOKEN" xml:space="preserve">
+    <value>Token de acesso não encontrado.</value>
+  </data>
   <data name="PASSWORD_LENGTH" xml:space="preserve">
     <value>A senha precisa ter ao menos 6 dígitos.</value>
   </data>
   <data name="UNKNOWN_ERROR" xml:space="preserve">
     <value>Ocorreu um erro desconhecido.</value>
+  </data>
+  <data name="USER_WITHOUT_PERMISSION_ACCESS_RESOURCE" xml:space="preserve">
+    <value>O usuário não tem permissão para acessar este recurso.</value>
+  </data>
+  <data name="CURRENT_PASSWORD_DIFFERENT_REGISTERED_PASSWORD" xml:space="preserve">
+    <value>Senha atual não corresponde à senha registrada do usuário.</value>
+  </data>
+  <data name="PASSWORD_EMPTY" xml:space="preserve">
+    <value>A senha não pode ser vazia.</value>
   </data>
 </root>
