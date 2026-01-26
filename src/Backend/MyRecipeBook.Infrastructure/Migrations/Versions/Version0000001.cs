@@ -11,7 +11,6 @@ namespace MyRecipeBook.Infrastructure.Migrations.Versions
                 .WithColumn("Name").AsString(255).NotNullable()
                 .WithColumn("Email").AsString(255).NotNullable()
                 .WithColumn("Password").AsString(2000).NotNullable();
-
         }
     }
 }

@@ -33,6 +33,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UseCases.Test", "tests\UseCases.Test\UseCases.Test.csproj", "{CB724CCD-938D-4051-B35C-3E0444FB7064}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi.Test", "tests\WebApi.Test\WebApi.Test.csproj", "{C368C137-FE3A-41BF-8242-4B71BB4856D7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{01D1F21C-A6F4-41C7-A5C7-0B432D057D36} = {01D1F21C-A6F4-41C7-A5C7-0B432D057D36}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
