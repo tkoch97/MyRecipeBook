@@ -3,6 +3,7 @@ using CommonTestUtilities.Mapper;
 using CommonTestUtilities.Repositories;
 using CommonTestUtilities.Repositories.User;
 using CommonTestUtilities.Requests;
+using CommonTestUtilities.Tokens;
 using MyRecipeBook.Application.UseCases.User.Register;
 using MyRecipeBook.Exceptions;
 using MyRecipeBook.Exceptions.ExceptionsBase;
@@ -12,6 +13,7 @@ namespace UseCases.Test.User.Register
 {
     public class RegisterUserUseCaseTest
     {
+
         [Fact]
         public async Task UseCase_Should_ReturnsRegisteredUserResponse_When_RequestIsValid()
         {
@@ -24,6 +26,8 @@ namespace UseCases.Test.User.Register
 
             result.ShouldNotBeNull();
             result.Name.ShouldBe(request.Name);
+            result.Tokens.ShouldNotBeNull();
+            result.Tokens.AccessToken.ShouldNotBeNullOrWhiteSpace();
 
         }
 
@@ -65,22 +69,21 @@ namespace UseCases.Test.User.Register
 
         private static RegisterUserUseCase CreateUseCase(string? email = null)
         {
+
             var mapper = MapperBuilder.Build();
-
             var passwordEncrypter = PasswordEncripterBuilder.Build();
-
+            var writeOnlyRepository = UserWriteOnlyRepositoryBuilder.Build();
+            var unitOfWork = UnitOfWorkBuilder.Build();
+            var accessTokenGenerator = JwtTokenGeneratorBuilder.Build();
             var readOnlyRepositoryBuilder = new UserReadOnlyRepositoryBuilder();
+
 
             if(!string.IsNullOrEmpty(email))
             {
                 readOnlyRepositoryBuilder.ExistActiveUserWithEmail(email);
             }
 
-            var writeOnlyRepository = UserWriteOnlyRepositoryBuilder.Build();
-
-            var unitOfWork = UnitOfWorkBuilder.Build();
-
-            return new RegisterUserUseCase(writeOnlyRepository, readOnlyRepositoryBuilder.Build(), unitOfWork, passwordEncrypter, mapper);
+            return new RegisterUserUseCase(writeOnlyRepository, readOnlyRepositoryBuilder.Build(), unitOfWork, passwordEncrypter, mapper, accessTokenGenerator);
         }
     }
 }

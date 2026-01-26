@@ -1,27 +1,24 @@
 ﻿using CommonTestUtilities.Requests;
-using Microsoft.AspNetCore.Mvc.Testing;
 using MyRecipeBook.Exceptions;
 using Shouldly;
-using Shouldly.Configuration;
 using System.Globalization;
 using System.Net;
-using System.Net.Http.Json;
 using System.Text.Json;
 
-namespace WebApi.Test
+namespace WebApi.Test.User.Register
 {
-    public class RegisterUserTest : IClassFixture<CustomWebApplicationFactory>
+    public class RegisterUserTest : MyRecipeBookClassFixture
     {
-        private readonly HttpClient _httpClient;
+        private readonly string userRoute = "user";
 
-        public RegisterUserTest(CustomWebApplicationFactory factory) => _httpClient = factory.CreateClient();
+        public RegisterUserTest(CustomWebApplicationFactory factory) : base(factory){}
         
         [Fact]
         public async Task Post_Should_ReturnsCreatedStatusCodeAndResponseContent_When_RequestIsValid()
         {
             var request = RequestRegisterUserJsonBuilder.Build();
 
-            var response = await _httpClient.PostAsJsonAsync("User/register", request);
+            var response = await DoPost($"{userRoute}/register", request);
 
             await using var responseBody = await response.Content.ReadAsStreamAsync();
 
@@ -32,6 +29,7 @@ namespace WebApi.Test
                 name => name.ShouldNotBeNullOrEmpty(),
                 name => name.ShouldBe(request.Name)
                 );
+            responseData.RootElement.GetProperty("tokens").GetProperty("accessToken").GetString().ShouldNotBeNullOrEmpty();
 
         }
 
@@ -44,14 +42,7 @@ namespace WebApi.Test
             var request = RequestRegisterUserJsonBuilder.Build();
             request.Name = string.Empty;
 
-            if (_httpClient.DefaultRequestHeaders.Contains("Accept-Language"))
-            {
-                _httpClient.DefaultRequestHeaders.Remove("Accept-Language");
-            }
-
-            _httpClient.DefaultRequestHeaders.Add("Accept-Language", culture);
-
-            var response = await _httpClient.PostAsJsonAsync("User/register", request);
+            var response = await DoPost($"{userRoute}/register", request, culture);
 
             await using var responseBody = await response.Content.ReadAsStreamAsync();
 
