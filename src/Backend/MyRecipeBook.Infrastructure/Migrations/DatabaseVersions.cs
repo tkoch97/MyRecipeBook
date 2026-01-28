@@ -4,5 +4,6 @@
     {
         public const int TABLE_USER = 1;
         public const int TABLE_USER_ADD_USER_IDENTIFIER = 2;
+        public const int TABLE_RECIPES = 3;
     }
 }
