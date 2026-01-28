@@ -2,7 +2,7 @@
 
 namespace MyRecipeBook.Infrastructure.Migrations.Versions
 {
-    [Migration(DatabaseVersions.TABLE_RECIPES, "Create Recipes table")]
+    [Migration(DatabaseVersions.TABLE_RECIPES, "Create Recipes, Ingredients, Instructions and DishTypes tables")]
     public class Version0000003 : VersionBase
     {
         public override void Up()
