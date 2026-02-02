@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MyRecipeBook.Domain.Enums;
 using MyRecipeBook.Domain.Repositories;
 using MyRecipeBook.Domain.Repositories.User;
 using MyRecipeBook.Domain.Security.Cryptography;
@@ -23,6 +24,8 @@ namespace MyRecipeBook.Infrastructure
 
         public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {   
+            var databaseType = configuration.DatabaseType();
+
             AddPasswordEncrypter(services, configuration);
             AddRepositories(services);
             AddTokens(services, configuration);
@@ -31,8 +34,17 @@ namespace MyRecipeBook.Infrastructure
             {
                 return;
             }
-            AddDbContext_MySQL(services, configuration);
-            AddFluentMigrator_MySQL(services, configuration);
+
+            if (databaseType == DatabaseType.MySql)
+            {
+                AddDbContext_MySQL(services, configuration);
+                AddFluentMigrator_MySQL(services, configuration);
+                return;
+            } else
+            {
+                AddDbContext_SQLServer(services, configuration);
+                AddFluentMigrator_SqlServer(services, configuration);
+            }
         }
 
         private static void AddDbContext_MySQL(IServiceCollection services, IConfiguration configuration)
@@ -43,6 +55,16 @@ namespace MyRecipeBook.Infrastructure
             services.AddDbContext<MyRecipeBookDbContext>(options =>
             {
                 options.UseMySql(connectionString, serverVersion);
+            });
+        }
+
+        private static void AddDbContext_SQLServer(IServiceCollection services, IConfiguration configuration) 
+        { 
+            var connectionString = configuration.ConnectionString();
+
+            services.AddDbContext<MyRecipeBookDbContext>(options =>
+            {
+                options.UseSqlServer(connectionString);
             });
         }
 
@@ -57,7 +79,19 @@ namespace MyRecipeBook.Infrastructure
                 .ScanIn(Assembly.Load("MyRecipeBook.Infrastructure")).For.All();
             });
         }
-        
+
+        private static void AddFluentMigrator_SqlServer(IServiceCollection services, IConfiguration configuration)
+        {
+            var connectionString = configuration.ConnectionString();
+            services.AddFluentMigratorCore().ConfigureRunner(options =>
+            {
+                options
+                .AddSqlServer()
+                .WithGlobalConnectionString(connectionString)
+                .ScanIn(Assembly.Load("MyRecipeBook.Infrastructure")).For.All();
+            });
+        }
+
         private static void AddRepositories(IServiceCollection services)
         {
             services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
