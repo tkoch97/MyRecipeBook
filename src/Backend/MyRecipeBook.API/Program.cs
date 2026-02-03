@@ -84,10 +84,12 @@ void MigrateDataBase()
     {
         return;
     }
-    var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
+    var databaseType = builder.Configuration.DatabaseType();
     var connectionString = builder.Configuration.ConnectionString();
 
-    DatabaseMigration.Migrate(connectionString, serviceScope.ServiceProvider);
+    var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
+
+    DatabaseMigration.Migrate(databaseType, connectionString, serviceScope.ServiceProvider);
 
     // O service Scope é um escopo temporário de injeção de dependência
     // que é criado para realizar a migração do banco de dados. Pq o DbCOntext e o IMigrationRunner são scoped e

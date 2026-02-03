@@ -1,15 +1,21 @@
 ﻿using Dapper;
 using FluentMigrator.Runner;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.DependencyInjection;
+using MyRecipeBook.Domain.Enums;
 using MySqlConnector;
 
 namespace MyRecipeBook.Infrastructure.Migrations
 {
     public static class DatabaseMigration
     {
-        public static void Migrate(string connectionString, IServiceProvider serviceProvider)
+        public static void Migrate(DatabaseType databaseType, string connectionString, IServiceProvider serviceProvider)
         {
-            EnsureDatabaseCreated_MySql(connectionString);
+            if(databaseType == DatabaseType.SqlServer)
+                EnsureDatabaseCreated_SqlServer(connectionString);
+            else if(databaseType == DatabaseType.MySql)
+                EnsureDatabaseCreated_MySql(connectionString);
+
             MigrationsOnDatabase(serviceProvider);
         }
 
@@ -30,8 +36,27 @@ namespace MyRecipeBook.Infrastructure.Migrations
 
             if (!records.Any()) 
             {
-                dbConnection.Execute($"CREATE DATABASE `{databaseName}`;");
+                dbConnection.Execute($"CREATE DATABASE {databaseName}");
             }
+        }
+
+        private static void EnsureDatabaseCreated_SqlServer(string connectionString)
+        {
+            var connectionStringBuilder = new SqlConnectionStringBuilder(connectionString);
+            var databaseName = connectionStringBuilder.InitialCatalog;
+            connectionStringBuilder.Remove("Database");
+
+            using var dbConnection = new SqlConnection(connectionStringBuilder.ConnectionString);
+
+            var parameters = new DynamicParameters();
+            parameters.Add("name", databaseName);
+
+            var records = dbConnection.Query
+                (
+                "SELECT * FROM sys.databases WHERE name = @name", parameters
+                );
+            if(!records.Any())
+                dbConnection.Execute($"CREATE DATABASE {databaseName}");
         }
 
         private static void MigrationsOnDatabase(IServiceProvider serviceProvider)
