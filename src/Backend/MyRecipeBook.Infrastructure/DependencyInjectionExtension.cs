@@ -24,8 +24,6 @@ namespace MyRecipeBook.Infrastructure
 
         public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {   
-            var databaseType = configuration.DatabaseType();
-
             AddPasswordEncrypter(services, configuration);
             AddRepositories(services);
             AddTokens(services, configuration);
@@ -35,11 +33,11 @@ namespace MyRecipeBook.Infrastructure
                 return;
             }
 
+            var databaseType = configuration.DatabaseType();
             if (databaseType == DatabaseType.MySql)
             {
                 AddDbContext_MySQL(services, configuration);
                 AddFluentMigrator_MySQL(services, configuration);
-                return;
             } else
             {
                 AddDbContext_SQLServer(services, configuration);
