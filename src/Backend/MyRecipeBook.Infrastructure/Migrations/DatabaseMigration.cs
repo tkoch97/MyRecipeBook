@@ -36,8 +36,7 @@ namespace MyRecipeBook.Infrastructure.Migrations
 
             if (!records.Any()) 
             {
-                var safeDatabaseName = databaseName.Replace("`", "``");
-                dbConnection.Execute($"CREATE DATABASE `{safeDatabaseName}`");
+                dbConnection.Execute($"CREATE DATABASE `{databaseName}`;");
             }
         }
 
@@ -58,8 +57,7 @@ namespace MyRecipeBook.Infrastructure.Migrations
                 );
             if (!records.Any())
             {
-                var safeDatabaseName = databaseName.Replace("]", "]]");
-                dbConnection.Execute($"CREATE DATABASE [{safeDatabaseName}]");
+                dbConnection.Execute($"CREATE DATABASE {databaseName};");
             }
         }
 
