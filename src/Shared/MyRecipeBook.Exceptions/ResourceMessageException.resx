@@ -159,4 +159,37 @@
   <data name="PASSWORD_EMPTY" xml:space="preserve">
     <value>Password can't be empty.</value>
   </data>
+  <data name="DISH_TYPE_NOT_SUPPORTED" xml:space="preserve">
+    <value>The provided dish type is not supported.</value>
+  </data>
+  <data name="INSTRUCTION_STEPS_MUST_BE_UNIQUE" xml:space="preserve">
+    <value>The recipe steps must be unique.</value>
+  </data>
+  <data name="INSTRUCTION_TEXT_EXCEEDS_LIMIT_CHARACTERS" xml:space="preserve">
+    <value>The instruction description exceeds the maximum allowed character limit.</value>
+  </data>
+  <data name="INSTRUCTION_TEXT_EMPTY" xml:space="preserve">
+    <value>The instruction description is required.</value>
+  </data>
+  <data name="INSTRUCTION_STEP_MUST_BE_GREATER_THAN_ZERO" xml:space="preserve">
+    <value>The step number must be greater than zero.</value>
+  </data>
+  <data name="RECIPE_MUST_HAVE_AT_LEAST_ONE_INSTRUCTION" xml:space="preserve">
+    <value>The recipe must contain at least one instruction.</value>
+  </data>
+  <data name="INGREDIENT_EMPTY" xml:space="preserve">
+    <value>The ingredient name cannot be empty.</value>
+  </data>
+  <data name="RECIPE_MUST_HAVE_AT_LEAST_ONE_INGREDIENT" xml:space="preserve">
+    <value>The recipe must contain at least one ingredient.</value>
+  </data>
+  <data name="DIFFICULTY_LEVEL_NOT_SUPPORTED" xml:space="preserve">
+    <value>The provided difficulty level is not supported.</value>
+  </data>
+  <data name="COOKING_TIME_NOT_SUPPORTED" xml:space="preserve">
+    <value>The provided cooking time is not supported.</value>
+  </data>
+  <data name="RECIPE_TITLE_EMPTY" xml:space="preserve">
+    <value>The recipe title is required.</value>
+  </data>
 </root>
