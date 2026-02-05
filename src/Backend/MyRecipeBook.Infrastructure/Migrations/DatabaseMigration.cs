@@ -36,7 +36,8 @@ namespace MyRecipeBook.Infrastructure.Migrations
 
             if (!records.Any()) 
             {
-                dbConnection.Execute($"CREATE DATABASE `{databaseName}`");
+                var safeDatabaseName = databaseName.Replace("`", "``");
+                dbConnection.Execute($"CREATE DATABASE `{safeDatabaseName}`");
             }
         }
 
@@ -55,8 +56,11 @@ namespace MyRecipeBook.Infrastructure.Migrations
                 (
                 "SELECT * FROM sys.databases WHERE name = @name", parameters
                 );
-            if(!records.Any())
-                dbConnection.Execute($"CREATE DATABASE {databaseName}");
+            if (!records.Any())
+            {
+                var safeDatabaseName = databaseName.Replace("]", "]]");
+                dbConnection.Execute($"CREATE DATABASE [{safeDatabaseName}]");
+            }
         }
 
         private static void MigrationsOnDatabase(IServiceProvider serviceProvider)
