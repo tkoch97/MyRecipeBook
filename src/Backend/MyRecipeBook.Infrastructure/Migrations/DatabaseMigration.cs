@@ -36,7 +36,7 @@ namespace MyRecipeBook.Infrastructure.Migrations
 
             if (!records.Any()) 
             {
-                dbConnection.Execute($"CREATE DATABASE {databaseName}");
+                dbConnection.Execute($"CREATE DATABASE `{databaseName}`");
             }
         }
 
