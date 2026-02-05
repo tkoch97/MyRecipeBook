@@ -159,4 +159,37 @@
   <data name="PASSWORD_EMPTY" xml:space="preserve">
     <value>A senha não pode ser vazia.</value>
   </data>
+  <data name="DISH_TYPE_NOT_SUPPORTED" xml:space="preserve">
+    <value>O tipo de prato informado não é suportado.</value>
+  </data>
+  <data name="INSTRUCTION_STEPS_MUST_BE_UNIQUE" xml:space="preserve">
+    <value>Os passos da receita não podem se repetir.</value>
+  </data>
+  <data name="INSTRUCTION_TEXT_EXCEEDS_LIMIT_CHARACTERS" xml:space="preserve">
+    <value>A descrição da instrução ultrapassa o limite máximo de caracteres permitido.</value>
+  </data>
+  <data name="INSTRUCTION_TEXT_EMPTY" xml:space="preserve">
+    <value>A descrição da instrução é obrigatória.</value>
+  </data>
+  <data name="INSTRUCTION_STEP_MUST_BE_GREATER_THAN_ZERO" xml:space="preserve">
+    <value>O número do passo deve ser maior que zero.</value>
+  </data>
+  <data name="RECIPE_MUST_HAVE_AT_LEAST_ONE_INSTRUCTION" xml:space="preserve">
+    <value>A receita deve conter pelo menos uma instrução de preparo.</value>
+  </data>
+  <data name="INGREDIENT_EMPTY" xml:space="preserve">
+    <value>O nome do ingrediente não pode estar vazio.</value>
+  </data>
+  <data name="RECIPE_MUST_HAVE_AT_LEAST_ONE_INGREDIENT" xml:space="preserve">
+    <value>A receita deve conter pelo menos um ingrediente.</value>
+  </data>
+  <data name="DIFFICULTY_LEVEL_NOT_SUPPORTED" xml:space="preserve">
+    <value>O nível de dificuldade informado não é suportado.</value>
+  </data>
+  <data name="COOKING_TIME_NOT_SUPPORTED" xml:space="preserve">
+    <value>O tempo de preparo informado não é suportado.</value>
+  </data>
+  <data name="RECIPE_TITLE_EMPTY" xml:space="preserve">
+    <value>O título da receita é obrigatório.</value>
+  </data>
 </root>

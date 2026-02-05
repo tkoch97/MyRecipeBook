@@ -61,6 +61,15 @@ namespace MyRecipeBook.Exceptions {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The provided cooking time is not supported..
+        /// </summary>
+        public static string COOKING_TIME_NOT_SUPPORTED {
+            get {
+                return ResourceManager.GetString("COOKING_TIME_NOT_SUPPORTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Current password does not match the user&apos;s registered password..
         /// </summary>
         public static string CURRENT_PASSWORD_DIFFERENT_REGISTERED_PASSWORD {
@@ -75,6 +84,24 @@ namespace MyRecipeBook.Exceptions {
         public static string CURRENT_PASSWORD_EMPTY {
             get {
                 return ResourceManager.GetString("CURRENT_PASSWORD_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The provided difficulty level is not supported..
+        /// </summary>
+        public static string DIFFICULTY_LEVEL_NOT_SUPPORTED {
+            get {
+                return ResourceManager.GetString("DIFFICULTY_LEVEL_NOT_SUPPORTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The provided dish type is not supported..
+        /// </summary>
+        public static string DISH_TYPE_NOT_SUPPORTED {
+            get {
+                return ResourceManager.GetString("DISH_TYPE_NOT_SUPPORTED", resourceCulture);
             }
         }
         
@@ -111,6 +138,51 @@ namespace MyRecipeBook.Exceptions {
         public static string EMAIL_VALID {
             get {
                 return ResourceManager.GetString("EMAIL_VALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The ingredient name cannot be empty..
+        /// </summary>
+        public static string INGREDIENT_EMPTY {
+            get {
+                return ResourceManager.GetString("INGREDIENT_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The step number must be greater than zero..
+        /// </summary>
+        public static string INSTRUCTION_STEP_MUST_BE_GREATER_THAN_ZERO {
+            get {
+                return ResourceManager.GetString("INSTRUCTION_STEP_MUST_BE_GREATER_THAN_ZERO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The recipe steps must be unique..
+        /// </summary>
+        public static string INSTRUCTION_STEPS_MUST_BE_UNIQUE {
+            get {
+                return ResourceManager.GetString("INSTRUCTION_STEPS_MUST_BE_UNIQUE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The instruction description is required..
+        /// </summary>
+        public static string INSTRUCTION_TEXT_EMPTY {
+            get {
+                return ResourceManager.GetString("INSTRUCTION_TEXT_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The instruction description exceeds the maximum allowed character limit..
+        /// </summary>
+        public static string INSTRUCTION_TEXT_EXCEEDS_LIMIT_CHARACTERS {
+            get {
+                return ResourceManager.GetString("INSTRUCTION_TEXT_EXCEEDS_LIMIT_CHARACTERS", resourceCulture);
             }
         }
         
@@ -165,6 +237,33 @@ namespace MyRecipeBook.Exceptions {
         public static string PASSWORDS_MUST_BE_DIFFERENT {
             get {
                 return ResourceManager.GetString("PASSWORDS_MUST_BE_DIFFERENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The recipe must contain at least one ingredient..
+        /// </summary>
+        public static string RECIPE_MUST_HAVE_AT_LEAST_ONE_INGREDIENT {
+            get {
+                return ResourceManager.GetString("RECIPE_MUST_HAVE_AT_LEAST_ONE_INGREDIENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The recipe must contain at least one instruction..
+        /// </summary>
+        public static string RECIPE_MUST_HAVE_AT_LEAST_ONE_INSTRUCTION {
+            get {
+                return ResourceManager.GetString("RECIPE_MUST_HAVE_AT_LEAST_ONE_INSTRUCTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The recipe title is required..
+        /// </summary>
+        public static string RECIPE_TITLE_EMPTY {
+            get {
+                return ResourceManager.GetString("RECIPE_TITLE_EMPTY", resourceCulture);
             }
         }
         
