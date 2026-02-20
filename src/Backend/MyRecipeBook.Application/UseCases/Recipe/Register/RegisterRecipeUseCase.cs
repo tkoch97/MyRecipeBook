@@ -25,20 +25,19 @@ namespace MyRecipeBook.Application.UseCases.Recipe.Register
         {
             _mapper = mapper;
             _recipeWriteOnlyRepository = recipeWriteOnlyRepository;
-            _mapper = mapper;
             _loggedUser = loggedUser;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<ResponseRegisteredRecipeJson> Execute(RequestRecipeJson request)
         {
             Validate(request);
-
             var loggedUser = await _loggedUser.User();
             var recipe = _mapper.Map<Domain.Entities.Recipe>(request);
             recipe.UserId = loggedUser.Id;
 
             var recipeInstructions = request.Instructions.OrderBy(i => i.Step).ToList();
-            for(var index = 0; index < recipeInstructions.Count; index++)
+            for (var index = 0; index < recipeInstructions.Count; index++)
             {
                 recipeInstructions[index].Step = index + 1;
             }
