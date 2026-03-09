@@ -225,7 +225,7 @@ namespace Validators.Test.Recipe
             var validator = new RecipeValidator();
 
             var request = RequestRecipeJsonBuilder.Build();
-            request.Instructions[1].Text = string.Join("", Enumerable.Repeat("Texto Looongo ", 200));
+            request.Instructions[0].Text = RequestStringGenerator.Paragraphs(minCharacters: 2001);
 
             var result = validator.Validate(request);
 
