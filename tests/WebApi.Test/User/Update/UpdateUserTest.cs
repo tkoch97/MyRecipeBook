@@ -27,7 +27,7 @@ namespace WebApi.Test.User.Update
 
             var response = await DoPut(route, request, token);
 
-            response.StatusCode.ShouldBe(System.Net.HttpStatusCode.NoContent);
+            response.StatusCode.ShouldBe(HttpStatusCode.NoContent);
         }
 
         [Theory]
