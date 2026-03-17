@@ -21,7 +21,7 @@ public class GetUserProfileInvalidTokenTest : MyRecipeBookClassFixture
     [InlineData("es-ES")]
     public async Task Should_ReturnsUnauthorized_When_TokenIsIvalid(string culture)
     {
-        var response = await DoGet(route, token: "invalid_token", culture);
+        var response = await DoGet(route: route, token: "invalid_token", culture: culture);
 
         await using var responseBody = await response.Content.ReadAsStreamAsync();
         var responseData = await JsonDocument.ParseAsync(responseBody);
@@ -44,7 +44,7 @@ public class GetUserProfileInvalidTokenTest : MyRecipeBookClassFixture
     [InlineData("es-ES")]
     public async Task Should_ReturnsUnauthorized_When_TokenIsEmpty(string culture)
     {
-        var response = await DoGet(route, token: string.Empty, culture);
+        var response = await DoGet(route: route, token: string.Empty, culture: culture);
 
         await using var responseBody = await response.Content.ReadAsStreamAsync();
         var responseData = await JsonDocument.ParseAsync(responseBody);
@@ -71,7 +71,7 @@ public class GetUserProfileInvalidTokenTest : MyRecipeBookClassFixture
         var token = JwtTokenGeneratorBuilder.Build().Generate(Guid.NewGuid()); 
         // Token vai ser válido, mas não existirá nenhum usuário com esse identificador
 
-        var response = await DoGet(route, token, culture);
+        var response = await DoGet(route: route, token: token, culture: culture);
         await using var responseBody = await response.Content.ReadAsStreamAsync();
         var responseData = await JsonDocument.ParseAsync(responseBody);
 

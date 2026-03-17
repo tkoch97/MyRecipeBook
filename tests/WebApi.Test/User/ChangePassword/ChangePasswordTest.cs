@@ -32,7 +32,7 @@ namespace WebApi.Test.User.ChangePassword
         {
             _request.CurrentPassword = _password;
 
-            var response = await DoPut(route, _request, _token);
+            var response = await DoPut(route: route, request:_request, token: _token);
 
             response.StatusCode.ShouldBe(HttpStatusCode.NoContent);
 
@@ -42,13 +42,13 @@ namespace WebApi.Test.User.ChangePassword
                 Password = _password
             };
 
-            var loginResponse = await DoPost("login", loginRequest);
+            var loginResponse = await DoPost(route: "login", request: loginRequest);
 
             loginResponse.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
 
             loginRequest.Password = _request.NewPassword;
 
-            loginResponse = await DoPost("login", loginRequest);
+            loginResponse = await DoPost(route: "login", request: loginRequest);
             loginResponse.StatusCode.ShouldBe(HttpStatusCode.OK);
         }
 
@@ -58,7 +58,7 @@ namespace WebApi.Test.User.ChangePassword
         [InlineData("es-ES")]
         public async Task Put_Should_ReturnsBadRequestStatusCode_And_ErrorMsg_When_CurrentPasswordIsInvalid(string culture)
         {
-            var response = await DoPut(route, _request, _token, culture);
+            var response = await DoPut(route: route, request: _request, token: _token, culture: culture);
 
             var responseBody = await response.Content.ReadAsStreamAsync();
             var responseData = await JsonDocument.ParseAsync(responseBody);
@@ -84,7 +84,7 @@ namespace WebApi.Test.User.ChangePassword
             _request.NewPassword = string.Empty;
             _request.CurrentPassword = _password;
 
-            var response = await DoPut(route, _request, _token, culture);
+            var response = await DoPut(route: route, request: _request, token: _token, culture:culture);
 
             var responseBody = await response.Content.ReadAsStreamAsync();
             var responseData = await JsonDocument.ParseAsync(responseBody);

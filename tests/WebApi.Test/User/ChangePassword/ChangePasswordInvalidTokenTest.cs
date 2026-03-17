@@ -22,7 +22,7 @@ namespace WebApi.Test.User.ChangePassword
         {
             var request = RequestChangePasswordJsonBuilder.Build();
 
-            var response = await DoPut(route, request, token: "invalid_token", culture);
+            var response = await DoPut(route: route, request: request, token: "invalid_token", culture: culture);
 
             await using var responseBody = await response.Content.ReadAsStreamAsync();
             var responseData = await JsonDocument.ParseAsync(responseBody);
@@ -48,7 +48,7 @@ namespace WebApi.Test.User.ChangePassword
         {
             var request = RequestChangePasswordJsonBuilder.Build();
 
-            var response = await DoPut(route, request, token: "", culture);
+            var response = await DoPut(route: route, request: request, token: "", culture: culture);
 
             await using var responseBody = await response.Content.ReadAsStreamAsync();
             var responseData = await JsonDocument.ParseAsync(responseBody);
@@ -74,7 +74,7 @@ namespace WebApi.Test.User.ChangePassword
             var token = JwtTokenGeneratorBuilder.Build().Generate(Guid.NewGuid());
             var request = RequestChangePasswordJsonBuilder.Build();
 
-            var response = await DoPut(route, request, token, culture);
+            var response = await DoPut(route: route, request: request, token: token, culture: culture);
 
             await using var responseBody = await response.Content.ReadAsStreamAsync();
             var responseData = await JsonDocument.ParseAsync(responseBody);
