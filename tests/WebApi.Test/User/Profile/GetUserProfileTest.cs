@@ -26,7 +26,7 @@ namespace WebApi.Test.User.Profile
         {
             var token = JwtTokenGeneratorBuilder.Build().Generate(_userIdentifier);
 
-            var response = await DoGet(route, token);
+            var response = await DoGet(route: route, token: token);
 
             response.StatusCode.ShouldBe(HttpStatusCode.OK);
 

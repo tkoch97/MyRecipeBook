@@ -6,47 +6,50 @@ using System.Globalization;
 using System.Net;
 using System.Text.Json;
 
-namespace WebApi.Test.User.Update
+namespace WebApi.Test.Recipe.Register
 {
-    public class UpdateUserTest : MyRecipeBookClassFixture
+    public class RegisterRecipeTest : MyRecipeBookClassFixture
     {
-        private readonly string route = "user/update-profile";
+        private readonly string route = "recipe/register";
         private readonly Guid _userIdentifier;
 
-        public UpdateUserTest(CustomWebApplicationFactory factory) : base(factory)
+        public RegisterRecipeTest(CustomWebApplicationFactory factory) : base(factory)
         {
             _userIdentifier = factory.GetUserIdentifier();
         }
 
         [Fact]
-        public async Task Put_Should_ReturnsNoContentStatusCode_When_RequestIsValid()
+        public async Task Post_Should_ReturnsCreatedStatusCode_When_RequestIsValid()
         {
-            var request = RequestUpdateUserJsonBuilder.Build();
+            var request = RequestRecipeJsonBuilder.Build();
 
             var token = JwtTokenGeneratorBuilder.Build().Generate(_userIdentifier);
 
-            var response = await DoPut(route, request, token);
+            var response = await DoPost(route: route, request: request, token: token);
 
-            response.StatusCode.ShouldBe(HttpStatusCode.NoContent);
+            response.StatusCode.ShouldBe(HttpStatusCode.Created);
         }
 
         [Theory]
         [InlineData("en-US")]
         [InlineData("pt-BR")]
         [InlineData("es-ES")]
-        public async Task Put_Should_ReturnsBadRequestStatusCodeAndAnMsgError_When_NameIsEmpty(string culture)
+        public async Task Post_Should_ReturnsBadRequestStatusCode_When_TitleIsEmpty(string culture)
         {
-            var request = RequestUpdateUserJsonBuilder.Build();
-
-            request.Name = string.Empty;
+            var request = RequestRecipeJsonBuilder.Build();
+            request.Title = string.Empty;
 
             var token = JwtTokenGeneratorBuilder.Build().Generate(_userIdentifier);
-            var response = await DoPut(route, request, token, culture);
 
-            var responseBody = await response.Content.ReadAsStreamAsync();
+            var response = await DoPost(route: route, request: request, token: token, culture: culture);
+
+            await using var responseBody = await response.Content.ReadAsStreamAsync();
+
             var responseData = await JsonDocument.ParseAsync(responseBody);
+
             var errors = responseData.RootElement.GetProperty("errors").EnumerateArray().Select(e => e.GetString());
-            var responseErrorMsgExpected = ResourceMessageException.ResourceManager.GetString("NAME_EMPTY", new CultureInfo(culture));
+
+            var responseErrorMsgExpected = ResourceMessageException.ResourceManager.GetString("RECIPE_TITLE_EMPTY", new CultureInfo(culture));
 
             response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
             errors.ShouldSatisfyAllConditions

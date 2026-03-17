@@ -1,5 +1,4 @@
 ﻿using CommonTestUtilities.Entities;
-using CommonTestUtilities.Tokens;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
