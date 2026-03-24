@@ -1,9 +1,11 @@
-﻿using MyRecipeBook.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using MyRecipeBook.Domain.Dtos;
+using MyRecipeBook.Domain.Entities;
 using MyRecipeBook.Domain.Repositories.Recipe;
 
 namespace MyRecipeBook.Infrastructure.DataAccess.Repositories
 {
-    public class RecipeRepository : IRecipeWriteOnlyRepository
+    public class RecipeRepository : IRecipeWriteOnlyRepository, IRecipeReadOnlyRepository
     {
         private readonly MyRecipeBookDbContext _dbContext;
 
@@ -13,5 +15,34 @@ namespace MyRecipeBook.Infrastructure.DataAccess.Repositories
         }
 
         public async Task Add(Recipe recipe) => await _dbContext.Recipes.AddAsync(recipe);
+
+        public async Task<IList<Recipe>> Filter(User user, FilterRecipesDto filters)
+        {
+            var query = _dbContext.Recipes
+                .AsNoTracking()
+                .Include(recipe => recipe.Ingredients)
+                .Where(recipe => recipe.Active && recipe.UserId == user.Id);
+
+            if (filters.CookingTimes.Any())
+            {
+                query = query.Where(recipe => recipe.CookingTime.HasValue && filters.CookingTimes.Contains(recipe.CookingTime.Value));
+            }
+            if (filters.Difficulties.Any())
+            {
+                query = query.Where(recipe => recipe.Difficulty.HasValue && filters.Difficulties.Contains(recipe.Difficulty.Value));
+            }
+            if (filters.DishTypes.Any())
+            {
+                query = query.Where(recipe => recipe.DishTypes.Any(dishType => filters.DishTypes.Contains(dishType.Type)));
+            }
+
+            if (!string.IsNullOrEmpty(filters.RecipeTitle_Ingredients))
+            {
+                query = query.Where(recipe => recipe.Title.Contains(filters.RecipeTitle_Ingredients)
+                || recipe.Ingredients.Any(ingredient => ingredient.Item.Contains(filters.RecipeTitle_Ingredients)));
+            }
+
+            return await query.ToListAsync();
+        }
     }
 }
